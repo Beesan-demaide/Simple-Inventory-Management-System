@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simple_Management_Inventory_System
+namespace Simple_Management_Inventory_System.Domain.General
 {
     public class Product
     {
@@ -12,7 +12,7 @@ namespace Simple_Management_Inventory_System
         private int quantity;
         private int price;
 
-        public Product(string name, int quantity, int price)
+        public Product(string name, int price , int quantity)
         {
             Name = name;
             Quantity = quantity;
