@@ -47,9 +47,10 @@ namespace Simple_Management_Inventory_System.Domain.General
                     case "4":
                         DeleteProduct();
                         break;
-                    case "5":
+                   case "5":
                         SearchProduct();
                         break;
+                  
                     case "6":
                         break;
                     default:
@@ -64,6 +65,7 @@ namespace Simple_Management_Inventory_System.Domain.General
         {
             Console.WriteLine("Write product Name: ");
             string ProductName = Console.ReadLine();
+            bool found=false;
             if (products.Count == 0)
             {
                 Console.WriteLine("The Inventory not have any Products");
@@ -76,11 +78,17 @@ namespace Simple_Management_Inventory_System.Domain.General
                     Console.WriteLine($"Name: {products[i].Name}");
                     Console.WriteLine($"Price: {products[i].Price}");
                     Console.WriteLine($"Quantity: {products[i].Quantity}");
+                    found=true;
+                    break;
                 }
             }
-
+            if(!found)
+            {
+                Console.WriteLine("Product Not Found");
+            }
 
         }
+
 
         private static void DeleteProduct()
         {
@@ -154,6 +162,7 @@ namespace Simple_Management_Inventory_System.Domain.General
                 Console.WriteLine($"Name: {myproduct.Name}");
                 Console.WriteLine($"Price: {myproduct.Price}");
                 Console.WriteLine($"Quantity: {myproduct.Quantity}");
+                Console.WriteLine("-----------------");
 
             }
             
