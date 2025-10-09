@@ -41,15 +41,50 @@ namespace Simple_Management_Inventory_System.Domain.General
                     case "2":
                             ViewAllProducts();
                         break;
+                    case "3":
+                        EditProduct();
+                        break;
+
                     case "6":
-                        break;
-                    default:
-                        Console.WriteLine("Invalid selection,please try again");
-                        break;
-                }
+                            break;
+                        default:
+                            Console.WriteLine("Invalid selection,please try again");
+                            break;
+                        }
             }
             while (userSelection != "6");
           }
+
+        private static void EditProduct()
+        {
+            Console.WriteLine("Please Enter a name of product to edit it: ");
+            string ProductNameToEdit=Console.ReadLine();
+            foreach(Product product in products)
+            {
+                if (product.Name.Equals(ProductNameToEdit , StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Please Edit Name product: ");
+                    string NewProductName = Console.ReadLine();
+                    product.Name = NewProductName;
+
+                    Console.WriteLine("Please Edit Price product: ");
+                    string NewProductPrice = Console.ReadLine();
+                    product.Price = int.Parse(NewProductPrice);
+
+                    Console.WriteLine("Please Edit Quntity product: ");
+                    string NewProductQuntity = Console.ReadLine();
+                    product.Quantity = int.Parse(NewProductQuntity);
+
+                    Console.WriteLine("Product updated successfully!");
+                    break;
+
+                }
+                else
+                { Console.WriteLine("Sorry Product not found."); }
+            }
+
+
+        }
 
         private static void ViewAllProducts()
         {
