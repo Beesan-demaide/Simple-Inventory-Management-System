@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -36,6 +37,10 @@ namespace Simple_Management_Inventory_System.Domain.General
                     case "1":
                         AddNewProduct();
                         break;
+
+                    case "2":
+                            ViewAllProducts();
+                        break;
                     case "6":
                         break;
                     default:
@@ -45,30 +50,36 @@ namespace Simple_Management_Inventory_System.Domain.General
             }
             while (userSelection != "6");
           }
-       
 
-         
+        private static void ViewAllProducts()
+        {
 
+            for (int i = 0; i < products.Count; i++)
+            {
+                Product myproduct = products[i];
+                Console.WriteLine($"Product # {i + 1}");
+                Console.WriteLine($"Name: {myproduct.Name}");
+                Console.WriteLine($"Price: {myproduct.Price}");
+                Console.WriteLine($"Quantity: {myproduct.Quantity}");
 
-           public static void AddNewProduct()
+            }
+            
+        }
+
+        private static void AddNewProduct()
             {
             Console.WriteLine("Please Enter Product Name: ");
            string ProductName= Console.ReadLine();
+
             Console.WriteLine("Please Enter Product Price : ");
             int ProductPrice = int.Parse(Console.ReadLine());
+
             Console.WriteLine("Please Enter Product Quantity : ");
             int ProductQuantity =int.Parse(Console.ReadLine());  
 
             Product NewProduct = new Product(ProductName, ProductPrice , ProductQuantity);
             products.Add(NewProduct);
 
-            foreach(Product myproduct in products)
-            {
-                Console.WriteLine(myproduct.Name);
-                Console.WriteLine(myproduct.Price);
-                Console.WriteLine(myproduct.Quantity);
-
-            }
         }
 
         }

@@ -15,8 +15,9 @@ namespace Simple_Management_Inventory_System.Domain.General
         public Product(string name, int price , int quantity)
         {
             Name = name;
-            Quantity = quantity;
             Price = price;
+            Quantity = quantity;
+          
         }
 
         public string Name
