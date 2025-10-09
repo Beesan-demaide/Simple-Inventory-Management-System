@@ -39,31 +39,81 @@ namespace Simple_Management_Inventory_System.Domain.General
                         break;
 
                     case "2":
-                            ViewAllProducts();
+                        ViewAllProducts();
                         break;
                     case "3":
                         EditProduct();
                         break;
-
+                    case "4":
+                        DeleteProduct();
+                        break;
+                    case "5":
+                        SearchProduct();
+                        break;
                     case "6":
-                            break;
-                        default:
-                            Console.WriteLine("Invalid selection,please try again");
-                            break;
-                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection,please try again");
+                        break;
+                }
             }
             while (userSelection != "6");
-          }
+        }
+
+        private static void SearchProduct()
+        {
+            Console.WriteLine("Write product Name: ");
+            string ProductName = Console.ReadLine();
+            if (products.Count == 0)
+            {
+                Console.WriteLine("The Inventory not have any Products");
+                return;
+            }
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (products[i].Name.Equals(ProductName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"Name: {products[i].Name}");
+                    Console.WriteLine($"Price: {products[i].Price}");
+                    Console.WriteLine($"Quantity: {products[i].Quantity}");
+                }
+            }
+
+
+        }
+
+        private static void DeleteProduct()
+        {
+            Console.WriteLine("Write product Name to delete: ");
+            string ProductName = Console.ReadLine();
+            bool found = false;
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (products[i].Name.Equals(ProductName, StringComparison.OrdinalIgnoreCase))
+                {
+                    products.RemoveAt(i);
+                    Console.WriteLine("Product Deleted Successfully!");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                Console.WriteLine("Sorry Product Not found");
+            }
+
+}
 
         private static void EditProduct()
         {
             Console.WriteLine("Please Enter a name of product to edit it: ");
             string ProductNameToEdit=Console.ReadLine();
-            foreach(Product product in products)
+            bool found = false;
+            foreach (Product product in products)
             {
-                if (product.Name.Equals(ProductNameToEdit , StringComparison.OrdinalIgnoreCase))
+                if (product.Name.Equals(ProductNameToEdit, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine("Please Edit Name product: ");
+                    Console.WriteLine("Please Edit Product Name: ");
                     string NewProductName = Console.ReadLine();
                     product.Name = NewProductName;
 
@@ -76,18 +126,26 @@ namespace Simple_Management_Inventory_System.Domain.General
                     product.Quantity = int.Parse(NewProductQuntity);
 
                     Console.WriteLine("Product updated successfully!");
+                    found = true;
                     break;
 
                 }
-                else
-                { Console.WriteLine("Sorry Product not found."); }
             }
+                if(!found)
+                {
+                    Console.WriteLine("Sorry Product not found.");
 
-
-        }
+                }
+            }
+               
 
         private static void ViewAllProducts()
         {
+            if(products.Count == 0)
+            {
+                Console.WriteLine("The Inventory not have any Products");
+                return;
+            }
 
             for (int i = 0; i < products.Count; i++)
             {
@@ -114,9 +172,11 @@ namespace Simple_Management_Inventory_System.Domain.General
 
             Product NewProduct = new Product(ProductName, ProductPrice , ProductQuantity);
             products.Add(NewProduct);
+            Console.WriteLine("Product added successfully!");
+
 
         }
 
-        }
+    }
        
     }
